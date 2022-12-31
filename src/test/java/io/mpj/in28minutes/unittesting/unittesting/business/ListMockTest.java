@@ -70,7 +70,7 @@ public class ListMockTest {
     }
 
     @Test
-    public void spying() {
+    public void mocking() {
         ArrayList arrayListMock = mock(ArrayList.class);
 
         System.out.println(arrayListMock.get(0)); // returning default value: null
@@ -80,5 +80,25 @@ public class ListMockTest {
         System.out.println(arrayListMock.size()); //0
         when(arrayListMock.size()).thenReturn(5);
         System.out.println(arrayListMock.size()); //0
+    }
+
+    @Test
+    public void spying() {
+        ArrayList arrayListSpy = spy(ArrayList.class);
+
+        arrayListSpy.add("Test 0");
+
+        System.out.println(arrayListSpy.get(0)); // returning default value: null
+        System.out.println(arrayListSpy.size()); // returning default value: 0
+        System.out.println(arrayListSpy.add("Test 1"));
+        System.out.println(arrayListSpy.add("Test 2"));
+        System.out.println(arrayListSpy.size()); //0
+        when(arrayListSpy.size()).thenReturn(5);
+        System.out.println(arrayListSpy.size()); //5
+
+        arrayListSpy.add("Test 4");
+        System.out.println(arrayListSpy.size()); //5
+
+        verify(arrayListSpy).add("Test 4");
     }
 }
