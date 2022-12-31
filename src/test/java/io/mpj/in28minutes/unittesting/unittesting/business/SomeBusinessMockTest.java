@@ -1,21 +1,21 @@
 package io.mpj.in28minutes.unittesting.unittesting.business;
 
 import io.mpj.in28minutes.unittesting.unittesting.data.SomeDataService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SomeBusinessMockTest {
-    private final SomeBusinessImpl business = new SomeBusinessImpl();
-    private final SomeDataService dataServiceMock = mock(SomeDataService.class);
-
-    @BeforeEach
-    public void beforeEach() {
-        business.setSomeDataService(dataServiceMock);
-    }
+    @InjectMocks
+    private SomeBusinessImpl business;
+    @Mock
+    private SomeDataService dataServiceMock;
 
     @Test
     public void calculateSumUsingDataService_basic() {
