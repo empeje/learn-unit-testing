@@ -1,7 +1,9 @@
 package io.mpj.in28minutes.unittesting.unittesting.business;
 
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,5 +53,32 @@ public class ListMockTest {
         verify(mock, atLeastOnce()).get(anyInt());
         verify(mock, atMost(2)).get(anyInt());
         verify(mock, never()).get(2);
+    }
+
+    @Test
+    public void argumentCapturing() {
+        // SUT
+        mock.add("SomeString1");
+        mock.add("SomeString2");
+
+        // Verification
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mock, times(2)).add(captor.capture());
+
+        assertEquals("SomeString1", captor.getAllValues().get(0));
+        assertEquals("SomeString2", captor.getAllValues().get(1));
+    }
+
+    @Test
+    public void spying() {
+        ArrayList arrayListMock = mock(ArrayList.class);
+
+        System.out.println(arrayListMock.get(0)); // returning default value: null
+        System.out.println(arrayListMock.size()); // returning default value: 0
+        System.out.println(arrayListMock.add("Test 1"));
+        System.out.println(arrayListMock.add("Test 2"));
+        System.out.println(arrayListMock.size()); //0
+        when(arrayListMock.size()).thenReturn(5);
+        System.out.println(arrayListMock.size()); //0
     }
 }
