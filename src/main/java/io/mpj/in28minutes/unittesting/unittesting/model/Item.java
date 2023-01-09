@@ -1,10 +1,28 @@
 package io.mpj.in28minutes.unittesting.unittesting.model;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+@Entity
 public class Item {
+    @Id
     private final int id;
     private final String name;
     private final int price;
     private final int quantity;
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    @Transient
+    private int value;
 
     public Item(int id, String name, int price, int quantity) {
         this.id = id;
