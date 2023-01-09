@@ -23,7 +23,7 @@ public class ItemBusinessServiceTest {
     private ItemRepository repository;
 
     @Test
-    public void calculateSumUsingDataService_basic() {
+    public void retrieveAllItems_basic() {
         when(repository.findAll()).thenReturn(Arrays.asList(
                 new Item(1, "Ball", 10, 10),
                 new Item(1, "Ball", 10, 50)
