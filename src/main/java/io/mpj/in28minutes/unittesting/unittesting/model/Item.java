@@ -8,10 +8,14 @@ import jakarta.persistence.Transient;
 @Entity
 public class Item {
     @Id
-    private final int id;
-    private final String name;
-    private final int price;
-    private final int quantity;
+    private int id;
+    private String name;
+    private int price;
+    private int quantity;
+
+    protected Item() {
+
+    }
 
     public int getValue() {
         return value;
