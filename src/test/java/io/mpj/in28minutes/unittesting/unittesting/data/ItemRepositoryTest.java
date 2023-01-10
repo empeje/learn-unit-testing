@@ -20,12 +20,12 @@ public class ItemRepositoryTest {
     @Test
     public void testFindAll() {
         List<Item> items = repository.findAll();
-        assertEquals(3, items.size());
+        assertEquals(6, items.size());
     }
 
     @Test
     public void testFindById() {
-        Item item = repository.findById(10001).orElse(null);
-        assertEquals(10001, item.getId());
+        Item item = repository.findById(20001).orElse(null);
+        assertEquals("Item 1 test", item.getName());
     }
 }
