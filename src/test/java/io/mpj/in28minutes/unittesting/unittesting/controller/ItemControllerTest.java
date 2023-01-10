@@ -2,6 +2,7 @@ package io.mpj.in28minutes.unittesting.unittesting.controller;
 
 import io.mpj.in28minutes.unittesting.unittesting.business.ItemBusinessService;
 import io.mpj.in28minutes.unittesting.unittesting.model.Item;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -66,6 +67,24 @@ public class ItemControllerTest {
         // call GET "/dummy-item" application/json
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/all-items-from-database")
+                .accept(MediaType.APPLICATION_JSON);;
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{\"id\":1,\"name\":\"Ball\",\"price\":10}, {}]"))
+                .andReturn();
+
+        JSONAssert.assertEquals("[{\"id\":1,\"name\":\"Ball\",\"price\":10}, {}]", result.getResponse().getContentAsString(), false);
+    }
+    @Ignore
+    public void addItem_basic() throws Exception {
+        when(businessService.retrieveAllItems()).thenReturn(Arrays.asList(
+                new Item(1, "Ball", 10, 100),
+                new Item(2, "Ball", 10, 100)
+        ));
+        // call GET "/dummy-item" application/json
+        RequestBuilder request = MockMvcRequestBuilders
+                .post("/items")
+                .content("put your content here")
                 .accept(MediaType.APPLICATION_JSON);;
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
